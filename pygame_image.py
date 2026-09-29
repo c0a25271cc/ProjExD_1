@@ -22,23 +22,17 @@ def main():
             if event.type == pg.QUIT: return
 
         key_lst = pg.key.get_pressed() # 練習10-3：キーの押下状態取得
-        key_lst = pg.key.get_pressed()
-
-        # 演習-1 ①何も押していないときは左へ流れる
-        kk_rct.move_ip((-1, 0))
-
+        dx = -1 # 演習-1デフォルトで左に流れる
+        dy =  0 
         if key_lst[pg.K_UP]:
-            kk_rct.move_ip((0, -1))
-
+            dy = -1 # pygameは座標が上の方が数値が小さくなる
         if key_lst[pg.K_DOWN]:
-            kk_rct.move_ip((0, 1))
+            dy = +1 # 座標が下になると数値が上がる
+        if key_lst[pg.K_RIGHT]:
+            dx = +1 # キーが右に押されると右に進む
 
-        if key_lst[pg.K_LEFT]:
-            kk_rct.move_ip((-1, 0))
-
-        if key_lst[pg.K_RIGHT]: # 演習1-②右矢印は右に進む
-            kk_rct.move_ip((2, 0))
-
+        kk_rct.move_ip(dx, dy) # 演習10 こうかとんをキーに合わせて動く
+    
         x = tmr % 3200 # 練習9：背景をループさせる
         screen.blit(bg_img, [-x, 0])
         screen.blit(bg_img2, [-x + 1600, 0]) # 練習7　2枚目の背景画像もう一回blit
