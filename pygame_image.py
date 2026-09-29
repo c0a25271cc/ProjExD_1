@@ -12,13 +12,16 @@ def main():
     bg_img = pg.image.load("fig/pg_bg.jpg")
     kk_img = pg.image.load("fig/3.png") #こうかとん画像surfaceの作成
     kk_img = pg.transform.flip(kk_img, True, False) # 練習3こうかとん左右反転, True Trueだったら左右＋上下反転
+    bg_img2 = pg.transform.flip(bg_img, True, False) # 練習8、2枚目の背景画像を反転
     tmr = 0
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: return
 
-        x = -tmr
-        screen.blit(bg_img, [x, 0])
+        x = tmr % 3200 # 練習9：背景をループさせる
+        screen.blit(bg_img, [-x, 0])
+        screen.blit(bg_img2, [-x + 1600, 0]) # 練習7　2枚目の背景画像もう一回blit
+        screen.blit(bg_img, [-x + 3200, 0])
         screen.blit(kk_img, [300, 200]) # 練習4 こうかトン画像を表示
         pg.display.update()
         tmr += 1        
